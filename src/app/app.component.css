@@ -90,6 +90,23 @@ tr:nth-child(even){
     background: #fff0f5;
 }
 
+.editar{
+    width: auto;
+    margin: 0;
+    padding: 8px 16px;
+    background: #8bc34a;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-right: 8px;
+}
+
+.editar:hover{
+    background: #689f38;
+}
+
 .remover{
     width: auto;
     margin: 0;
@@ -112,7 +129,7 @@ hr{
 }
 
 p{
-   text-align: center;
+    text-align: center;
     margin-top: 20px;
     color: #777;
 }

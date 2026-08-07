@@ -17,6 +17,9 @@ export class AppComponent {
 
   lista: any[] = [];
 
+  indiceEdicao: number | null = null;
+
+
   cadastrar() {
 
     if (this.modelo.trim() === '' || this.valor === null || this.valor <= 0) {
@@ -24,19 +27,55 @@ export class AppComponent {
       return;
     }
 
-    this.lista.push({
-      modelo: this.modelo.toUpperCase(),
-      valor: this.valor
-    });
+
+    // ATUALIZAR
+    if (this.indiceEdicao !== null) {
+
+      this.lista[this.indiceEdicao].modelo = this.modelo.toUpperCase();
+      this.lista[this.indiceEdicao].valor = this.valor;
+
+      this.indiceEdicao = null;
+
+    }
+
+    // CADASTRAR NOVO
+    else {
+
+      this.lista.push({
+        modelo: this.modelo.toUpperCase(),
+        valor: this.valor
+      });
+
+    }
+
 
     this.modelo = '';
     this.valor = null;
 
   }
 
+
+  editar(indice: number) {
+
+    this.modelo = this.lista[indice].modelo;
+    this.valor = this.lista[indice].valor;
+
+    this.indiceEdicao = indice;
+
+  }
+
+
   remover(indice: number) {
 
     this.lista.splice(indice, 1);
+
+    if (this.indiceEdicao === indice) {
+
+      this.modelo = '';
+      this.valor = null;
+      this.indiceEdicao = null;
+
+    }
 
   }
 

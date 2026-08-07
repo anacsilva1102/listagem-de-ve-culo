@@ -1,59 +1,63 @@
 <div class="principal">
 
-  <h1>Cadastro de Veículos</h1>
+    <h1>Cadastro de Veículos</h1>
 
-  <label>Modelo do Veículo</label>
+    <label for="modelo">Modelo do Veículo</label>
+    <input
+        id="modelo"
+        type="text"
+        [(ngModel)]="modelo"
+        placeholder="Digite o modelo do veículo">
 
-  <input
-      type="text"
-      [(ngModel)]="modelo"
-      placeholder="Digite o modelo do veículo">
+    <label for="valor">Valor do Serviço (R$)</label>
+    <input
+        id="valor"
+        type="number"
+        [(ngModel)]="valor"
+        placeholder="Digite o valor do serviço">
 
-  <label>Valor do Serviço (R$)</label>
+    <button (click)="cadastrar()">
+        {{ indiceEdicao !== null ? 'Atualizar' : 'Cadastrar' }}
+    </button>
 
-  <input
-      type="number"
-      [(ngModel)]="valor"
-      placeholder="Digite o valor do serviço">
+    <hr>
 
-  <button (click)="cadastrar()">
-      Cadastrar
-  </button>
+    <h2>Veículos Cadastrados</h2>
 
-  <hr>
+    <table>
 
-  <h2>Veículos Cadastrados</h2>
+        <thead>
+            <tr>
+                <th>Modelo</th>
+                <th>Valor do Serviço</th>
+                <th>Ação</th>
+            </tr>
+        </thead>
 
-  <table *ngIf="lista.length > 0">
+        <tbody>
 
-      <thead>
-          <tr>
-              <th>Modelo</th>
-              <th>Valor do Serviço</th>
-              <th>Ação</th>
-          </tr>
-      </thead>
+            <tr *ngFor="let item of lista; let i = index">
 
-      <tbody>
-          <tr *ngFor="let item of lista; let i = index">
+                <td>{{ item.modelo }}</td>
 
-              <td>{{ item.modelo }}</td>
+                <td>{{ item.valor | currency:'BRL' }}</td>
 
-              <td>{{ item.valor | currency:'BRL' }}</td>
+                <td>
 
-              <td>
-                  <button class="remover" (click)="remover(i)">
-                      Remover
-                  </button>
-              </td>
+                    <button class="editar" (click)="editar(i)">
+                        Editar
+                    </button>
 
-          </tr>
-      </tbody>
+                    <button class="remover" (click)="remover(i)">
+                        Remover
+                    </button>
 
-  </table>
+                </td>
 
-  <p *ngIf="lista.length == 0">
-      Nenhum veículo cadastrado.
-  </p>
+            </tr>
+
+        </tbody>
+
+    </table>
 
 </div>
